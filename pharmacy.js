@@ -6,11 +6,13 @@ export class Drug {
   }
 }
 
+
 export class Pharmacy {
   constructor(drugs = []) {
     this.drugs = drugs;
   }
 
+  /// Handle the specifics of Fervex
   handleFervex(drug) {
     if (drug.benefit < 50) {
       drug.benefit = drug.benefit + 1;
@@ -27,6 +29,7 @@ export class Pharmacy {
     }
   }
 
+  /// Handle the specifics of the Herbal tea
   handleHerbalTea(drug) {
     if (drug.benefit < 50) {
       drug.benefit = drug.benefit + 1;
@@ -36,13 +39,14 @@ export class Pharmacy {
     }
   }
 
-  handleDefaultDrug(drug) {
+  /// Default handler for all drugs
+  handleDefaultDrug(drug, benefitDecreaseFactor) {
     if (drug.benefit > 0) {
-      drug.benefit = drug.benefit - 1;
+      drug.benefit = drug.benefit - benefitDecreaseFactor;
     }
 
     if (drug.expiresIn < 0 && drug.benefit > 0) {
-      drug.benefit = drug.benefit - 1;
+      drug.benefit = drug.benefit - benefitDecreaseFactor;
     }
   }
 
@@ -51,6 +55,7 @@ export class Pharmacy {
       if (drug.name === "Magic Pill") {
         return;
       }
+
       drug.expiresIn = drug.expiresIn - 1;
 
       switch (drug.name) {
@@ -60,8 +65,11 @@ export class Pharmacy {
         case "Herbal Tea":
           this.handleHerbalTea(drug);
           break;
+        case "Dafalgan":
+          this.handleDefaultDrug(drug, 2);
+          break;
         default:
-          this.handleDefaultDrug(drug);
+          this.handleDefaultDrug(drug, 1);
           break;
       }
     });
