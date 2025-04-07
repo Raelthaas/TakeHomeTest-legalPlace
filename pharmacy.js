@@ -1,3 +1,5 @@
+///TODO : create classes specific for each drug and a factory to handle the creation of drugs
+// in order to make this code even more maintainable
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
