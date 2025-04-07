@@ -6,7 +6,6 @@ export class Drug {
   }
 }
 
-
 export class Pharmacy {
   constructor(drugs = []) {
     this.drugs = drugs;
