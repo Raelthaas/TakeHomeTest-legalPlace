@@ -13,3 +13,16 @@ describe("Pharmacy", () => {
     ).toEqual([new Drug("Magic Pill", 2, 3)]);
   });
 });
+
+describe("Pharmacy - Herbal Tea", () => {
+  it("should increase benefits and reduce expiresIn", () => {
+    expect(
+      new Pharmacy([new Drug("Herbal Tea", 2, 3)]).updateBenefitValue()
+    ).toEqual([new Drug("Herbal Tea", 1, 4)]);
+  });
+  it("should increase benefits x2 and reduce expiresIn", () => {
+    expect(
+      new Pharmacy([new Drug("Herbal Tea", 0, 3)]).updateBenefitValue()
+    ).toEqual([new Drug("Herbal Tea", -1, 5)]);
+  });
+});
